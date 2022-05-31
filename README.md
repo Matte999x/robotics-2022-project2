@@ -6,3 +6,8 @@ Description of the project available [here](docs/Project2.pdf).
 - Pablo Martellucci
 - Matteo Pierini
 - Sara Vignali
+
+## ROS assets
+### Nodes
+- **odometry_tf** ([*odometry_tf.cpp*](src/odometry_tf.cpp))  
+It broadcasts the TF for the robot base link, starting from the odometry on the */odom* topic.
