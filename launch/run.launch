@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="project2" type="odometry_tf" name="odometry_tf" output="screen"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="odom_laser_front_tf" args="0.35 0 0 0 0 0.5150381 0.8571673 base_link laser_front"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="odom_laser_rear_tf" args="-0.35 0 0 0 0 0.866 0.5 base_link laser_rear"/>
+</launch>

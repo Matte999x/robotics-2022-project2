@@ -11,3 +11,6 @@ Description of the project available [here](docs/Project2.pdf).
 ### Nodes
 - **odometry_tf** ([*odometry_tf.cpp*](src/odometry_tf.cpp))  
 It broadcasts the TF for the robot base link, starting from the odometry on the */odom* topic.
+
+### Launch file
+The launch file [run.launch](launch/run.launch) starts the odometry_tf node and broadcasts the two static TF from *base_link* to *laser_front* and *laser_rear*.
