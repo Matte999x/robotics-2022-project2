@@ -1,0 +1,33 @@
+<launch>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="odom_to_laser_front_tf" args="0.35 0 0 0 0 0.5150381 0.8571673 base_link laser_front"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="odom_to_laser_rear_tf" args="-0.35 0 0 0 0 0.866 0.5 base_link laser_rear"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser_merged_tf" args="0 0 0 0 0 0 base_link laser_merged"/>
+
+    <node pkg="project2" type="odometry_tf" name="odometry_tf" output="screen"/>
+
+    <node pkg="ira_laser_tools" type="laserscan_multi_merger" name="laserscan_multi_merger" output="screen">
+        <param name="destination_frame" value="laser_merged"/>
+        <param name="scan_destination_topic" value="/merged_scan"/>
+        <param name="laserscan_topics" value ="/front/scan /rear/scan"/>
+        <param name="angle_min" value="-3.141592"/>
+        <param name="angle_max" value="3.141592"/>
+        <param name="angle_increment" value="0.003141592"/>
+        <param name="scan_time" value="0.0166666"/>
+        <param name="range_min" value="0.08"/>
+        <param name="range_max" value="16.0"/>
+    </node>
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find project2)/maps/map.yaml" output="screen"/>
+
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <remap from="scan" to="merged_scan"/>
+        <param name="update_min_d" value="0.1"/>
+        <param name="update_min_a" value="0.1"/>
+        <param name="initial_pose_x" value="0.0"/>
+        <param name="initial_pose_y" value="0.0"/>
+        <param name="initial_pose_a" value="0.0"/>
+        <param name="odom_model_type" value="omni"/>
+     </node>
+    
+</launch>
