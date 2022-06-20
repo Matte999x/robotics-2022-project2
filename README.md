@@ -1,6 +1,7 @@
 # Robotics Project 2 - A.Y. 2021-2022
 Second project of the Robotics Course (Perception, Localization and Mapping for Mobile Robots) at Politecnico di Milano.  
-Description of the project available [here](docs/Project2.pdf).
+Description of the project available [here](docs/Project2.pdf).  
+The first bag has been used for mapping and the other two for localization and path generation.
 
 ## Team members
 - Pablo Martellucci
