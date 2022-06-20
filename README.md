@@ -30,3 +30,7 @@ It launches the same nodes of *run.launch*, plus the path_generation node and th
 
 ### Services
 The ***save_path*** service (provided by the path_generation node) saves a copy of the map with the path of the robot. As specified in the [SavePath.srv](srv/SavePath.srv) service description, it does not need any input argument. It saves the map with the path as *map_with_path.png*, in the folder specified as argument of the path_generation node. If the node has been launched using the [*localization.launch*](launch/localization.launch) file, the selected folder is [project2/maps/](maps/).
+
+### TF tree
+The structure of the TF tree is reported below. The TF from *map* to *odom* is provided by the amcl node, the TF from *odom* to *base_link* is constantly updated by the odometry_tf node and the other three (from *base_link* to the three laser frames) are static.  
+<img src="docs/tf_tree.svg" width="600"/>
