@@ -14,6 +14,11 @@ find_package(catkin REQUIRED COMPONENTS
   tf2
   tf2_ros
 )
+find_package(OpenCV REQUIRED
+  core
+  imgcodecs
+  imgproc
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -56,11 +61,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  SavePath.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -70,10 +74,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -107,7 +111,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES project2
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS
+  message_runtime
 #  DEPENDS system_lib
 )
 
@@ -120,6 +125,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -136,6 +142,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(odometry_tf src/odometry_tf.cpp)
+add_executable(path_generation src/path_generation.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -146,9 +153,11 @@ add_executable(odometry_tf src/odometry_tf.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(odometry_tf ${catkin_EXPORTED_TARGETS})
+add_dependencies(path_generation ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(odometry_tf ${catkin_LIBRARIES})
+target_link_libraries(path_generation ${catkin_LIBRARIES} ${OpenCV_LIBS})
 
 #############
 ## Install ##

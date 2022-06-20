@@ -28,6 +28,8 @@
         <param name="initial_pose_y" value="0.0"/>
         <param name="initial_pose_a" value="0.0"/>
         <param name="odom_model_type" value="omni"/>
-     </node>
+    </node>
     
+    <node pkg="project2" type="path_generation" name="path_generation" args="$(find project2)/maps" output="screen"/>
+
 </launch>
